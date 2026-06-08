@@ -49,32 +49,5 @@ with open("student.csv", "w", newline="") as file:
 print("CSV Updated Successfully")
 
 
-# CSV → MySQL Sync
-
-with open("student.csv", "r") as file:
-
-    reader = csv.DictReader(file)
-
-    for row in reader:
-
-        cursor.execute(
-            """
-            UPDATE records
-            SET Name=%s,
-                Totle_fees=%s,
-                branch=%s
-            WHERE id=%s
-            """,
-            (
-                row["Name"],
-                row["Totle_fees"],
-                row["Branch"],
-                row["ID"]
-            )
-        )
-
-db.commit()
-
-print("MySQL Updated From CSV")
 
 db.close()
